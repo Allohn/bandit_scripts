@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Designate the directory where all the possible directories are
+base_dir="/home/bandit5/inhere/"
+
+# Start a for loop to enter each directory
+find "$base_dir" -type f | while IFS= read -r file_path; do #read safely. accounts for spaces, tabs, etc.
+
+    file_type=$(file "$file_path")
+    file_size=$(stat -c%s "$file_path")
+
+    if [[ "$file_type" == *"text"* ]] && \
+       [[ ! -x "$file_path" ]] && \
+       [[ "$file_size" -eq 1033 ]]; then #Check conditions for bandit 5
+        echo "FOUND: $file_path"
+        echo "Type: $file_type"
+        echo "Size: $file_size"
+    else
+	echo -e "\033[1;31mChecking:\033[0m $file_path" #Other files
+        echo "  Type: $file_type"
+        echo "  Size: $file_size"	
+    fi
+done

@@ -1,0 +1,4 @@
+sort file1 | uniq -u				: Sorts a file by alphabetical order. Shows un							ique lines
+find /dir/ -user user -group group -size 33c    : Finds a file by characteristics
+strings file 					: Finds printable lines in a file
+echo "hi" | tr "A-Za-z" "N-ZA-Mn-za-m"		: Rot13. ZA is transition to loop back.
